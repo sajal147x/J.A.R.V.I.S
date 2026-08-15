@@ -1,13 +1,17 @@
+import argparse
 import os
+
 from dotenv import load_dotenv
-import dotenv
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam
 
 
-
 def main():
 
+    #PARSING USER INPUT
+    parser = argparse.ArgumentParser(description="chatbot")
+    parser.add_argument("user_prompt", type=str, help="User Prompt")
+    args = parser.parse_args()
     #CONFIG
     load_dotenv()
     api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -17,7 +21,7 @@ def main():
     messages: list[ChatCompletionMessageParam]  = [
         {
             "role": "user",
-            "content": "Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum.",
+            "content": args.user_prompt,
         }
     ]
     #API CALL TO THE LLM
