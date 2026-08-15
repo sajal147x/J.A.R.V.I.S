@@ -25,6 +25,10 @@ def main():
         }
     ]
     #API CALL TO THE LLM
+    generate_content(client, messages)
+
+
+def generate_content(client: OpenAI, messages: list[ChatCompletionMessageParam]) -> None:
     response = client.chat.completions.create(model="openrouter/free", messages=messages)
     usage = response.usage
     #HANDLING NULL CASE
@@ -34,7 +38,6 @@ def main():
     print("Prompt tokens: ", usage.prompt_tokens)
     print("Response tokens: ", usage.completion_tokens)
     print(response.choices[0].message.content)
-
 
 
 if __name__ == "__main__":
