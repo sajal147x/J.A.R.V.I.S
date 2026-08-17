@@ -1,7 +1,7 @@
 import os
 
 def get_files_info(working_directory: str, directory: str = ".") -> str:
-
+    result = []
     try:
         absPath = os.path.abspath(working_directory)
         fullPath = os.path.join(absPath, directory)
@@ -12,7 +12,16 @@ def get_files_info(working_directory: str, directory: str = ".") -> str:
         if not os.path.isdir(targetDir):
             return f'Error: "{directory}" is not a directory'
 
-        return f'Success: "{directory}" is within the working directory'
+        ls = os.listdir(targetDir)
+        for output in ls:
+            name = output
+            entry_path = os.path.join(targetDir, output)
+            size = os.path.getsize(entry_path)
+            isDir = os.path.isdir(entry_path)
+            output = f'- {name}: file_size={size} bytes, is_dir={isDir} '
+            result.append(output)
+        return "\n".join(result)
+
     except Exception as e:
         message = str(e)
         return f'Error: Internal Server Error {message}'
