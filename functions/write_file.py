@@ -19,3 +19,24 @@ def write_file(working_directory: str, file_path: str, content: str) -> str:
     except Exception as e:
         message = str(e)
         return f'Error: Internal Server Error {message}'
+
+schema_write_file = {
+    "type": "function",
+    "function": {
+        "name": "write_file",
+        "description": "Overwrites the content of a specified file with the new content",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "file path to the file whose content will be overwritten, relative to the working directory",
+                },
+                "content": {
+                    "type": "string",
+                    "description": "the content which will be written to the file",
+                },
+            },
+        },
+    },
+}

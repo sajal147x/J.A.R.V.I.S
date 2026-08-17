@@ -22,3 +22,20 @@ def get_file_content(working_directory: str, file_path: str) -> str:
     except Exception as e:
         message = str(e)
         return f'Error: Internal Server Error {message}'
+
+schema_get_file_content = {
+    "type": "function",
+    "function": {
+        "name": "get_file_content",
+        "description": "Returns the content of a given file, if the file is more than 10,000 characters then it returns the first 10000 characters",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "file path to get the content from, relative to the working directory (default is the working directory itself)",
+                },
+            },
+        },
+    },
+}
