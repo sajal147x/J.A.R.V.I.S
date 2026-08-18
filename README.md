@@ -8,3 +8,4 @@ This project is about learning how to build an AI agent, following a course from
 2. Wrote tools as plain Python functions — listing directory contents, reading a file, writing to a file, and running a Python file.
 3. Generated metadata (JSON schemas) for these functions and passed them to the LLM as tools it can choose to call.
 4. Handled the LLM's tool call by dispatching to the matching function and returning the result.
+5. Wrapped the LLM call inside a feedback loop which keeps calling tools if the LLM wants to otherwise print the final result
